@@ -1,0 +1,121 @@
+create database customer;
+
+use customer;
+
+create table customer_info1
+(
+	cust_id int,
+    cust_name varchar(50),
+    cust_rporting_time date,
+    cust_salary decimal,
+    cust_age tinyint,
+    cust_city varchar(50)
+);
+
+
+insert into customer_info1 value
+( 100,'A1','2026-03-01',50000,20,'Solapur'),
+( 101,'A1','2026-03-02',50000,20,'Solapur'),
+( 102,'B1','2026-03-03',55000,21,'Mumbai'),
+( 103,'C1','2026-03-04',30000,19,'Pune'),
+( 104,'D1','2026-03-05',25000,21,'Mumbai'),
+( 105,'E1','2026-03-06',50000,20,'Pune'),
+( 106,'F1','2026-03-07',26000,20,'Nagpur'),
+( 107,'F1','2026-03-08',50000,25,'Nagpur'),
+( 108,'G1','2026-03-09',50000,20,'Solapur'),
+( 109,'H1','2026-03-10',15000,20,'Mumbai'),
+( 110,'I1','2026-03-11',45000,19,'Pune');
+
+
+select * from customer_info1;
+
+
+-- 1. without distinct query
+select cust_city from customer_info1;
+
+-- 2. With distinct query with column name
+select distinct cust_city from customer_info1;
+
+
+-- 3. Without column name distinct query
+select distinct * from customer_info1;
+
+-- 4. Use distinct keyword with Where Clause
+
+-- 4.1 
+select cust_name, cust_rporting_time,cust_salary, cust_age from customer_info1 where cust_name = 'A1';
+
+-- 4.2 
+select distinct * from customer_info1 where cust_name = 'A1';
+
+-- 4.3 
+select distinct cust_name, cust_rporting_time,cust_salary,cust_age from customer_info1 where cust_name = 'A1';
+
+-- 5. ORDER BY Keyword
+
+-- 5.1 
+select * from customer_info1 order by cust_salary asc;
+
+-- 5.2
+select * from customer_info1 order by cust_salary desc;
+
+-- 5.3
+select * from customer_info1 order by cust_name asc;
+
+-- 5.4 
+select * from customer_info1 order by cust_name desc;
+
+-- 5.5 
+select * from customer_info1 order by cust_name asc, cust_salary desc;
+
+-- 5.6
+select * from customer_info1 order by cust_name desc, cust_salary asc;
+
+-- 5.7 
+select * from customer_info1 where cust_city = 'Pune' order by cust_name asc;
+
+-- 5.8 
+select * from customer_info1 where cust_city = 'Pune' order by cust_name desc;
+
+-- 5.9
+select * from customer_info1 where cust_city IN ('Mumbai', 'Pune') and cust_rporting_time 
+between '2026-03-01' and '2026-03-11' order by cust_name asc;
+
+-- 5.10
+select * from customer_info1 where cust_city IN ('Mumbai', 'Pune') and cust_rporting_time 
+between '2026-03-01' and '2026-03-11' order by cust_name desc;
+
+-- 5.11 
+select * from customer_info1 where cust_city = 'Pune' and cust_rporting_time 
+between '2026-03-01' and '2026-03-11' order by cust_salary desc;
+
+-- 5.12
+select cust_name,cust_salary from customer_info1 where cust_city NOT IN('Nagpur') order by cust_name;
+
+-- 5.13 using distinct key with order by and column name
+select distinct cust_name, cust_salary from customer_info1 where cust_city not in ('Nagpur') order by cust_name;
+
+-- 5.14 using distinct key with order by and without column name
+select distinct * from customer_info1 where cust_city not in ('Nagpur') order by cust_name;
+
+
+
+
+create table cust_info(cust_id int , cust_name varchar(50));
+
+--  without column name we add values 
+insert into cust_info value 
+(101,'Neha'),
+(102,'Asmita'),
+(103,'Rakshata'),
+(104,'Raghav'),
+(105,'Reet');
+
+select * from cust_info;
+
+-- Relica query
+
+create table cust_info1   -- new table
+select * from cust_info;  -- exsting table 
+
+select * from cust_info1;
