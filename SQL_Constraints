@@ -1,0 +1,111 @@
+--  SQL Constraints
+
+
+create database student;
+use student;
+
+-- 1. NOT NULL  Constraint 
+
+create table stud(stud_id int not null, stud_name varchar(50));
+
+insert into stud(stud_id , stud_name)value(100,'Neha'),(101,'Rakshata'),(102,'Asmita');
+insert into stud(stud_id , stud_name)value(103,'');
+
+select * from stud;
+
+-- 2. Unique Constraint
+
+create table stud1(stud_id int unique, stud_name varchar(50));
+
+insert into stud1(stud_id , stud_name)value(101,'Neha'),(102,'Neha'),(103,'Asmita'),(104,'Rakshat');
+insert into stud(stud_id , stud_name)value(101,'Rakshata');
+
+select * from stud1;
+
+
+-- 3. Unsigned Constraint
+
+create table stud2(stud_id int unique, stud_name varchar(50) not null, stud_age tinyint unsigned);
+
+insert into stud2(stud_id, stud_name,stud_age)value(101,'Neha',12),(102,'Asmita',19),(103,'Rakshata',20);
+
+select * from stud2;
+
+
+-- 4. Default Constraint
+
+create table stud3(stud_id int unique, stud_name varchar(50) not null, stud_age tinyint unsigned, stud_city varchar(50) default 'Solapur');
+
+insert into stud3(stud_id, stud_name,stud_age,stud_city)value(101,'Neha',12,'Solapur'),(102,'Asmita',19,'Solapur'),(103,'Rakshata',20,'Pune');
+insert into stud3(stud_id, stud_name,stud_age,stud_city)value(104,'Reet',18,'');
+insert into stud3(stud_id, stud_name,stud_age)value(105,'Radhika',18);
+
+select * from stud3;
+
+-- 5. Check Constraint
+
+create table stud4(stud_id int unique, stud_name varchar(50) not null, stud_age tinyint unsigned, stud_city varchar(50) default 'Solapur', check (stud_age >= 18));
+
+insert into stud4(stud_id, stud_name,stud_age,stud_city)value(101,'Neha',19,'Solapur'),(102,'Asmita',19,'Solapur'),(103,'Rakshata',20,'Pune');
+
+select * from stud4;
+
+-- 6. Check Constraint for student department
+
+create table stud5(stud_id int unique, stud_name varchar(50) not null, stud_dept varchar(50),stud_age tinyint unsigned, stud_city varchar(50) default 'Solapur', check (stud_age >= 18),check (stud_dept in('CSE','AIDS','ENTC')));
+
+insert into stud5(stud_id, stud_name,stud_dept,stud_age,stud_city)value(101,'Neha','CSE',19,'Solapur'),(102,'Asmita','ENTC',19,'Solapur'),(103,'Rakshata','AIDS',20,'Pune');
+insert into stud5(stud_id, stud_name,stud_dept,stud_age,stud_city)value(104,'Ruhi','ECE',19,'Pune');
+select * from stud5;
+
+-- 7. Primary Key Constraint
+
+create table stud6(stud_id int primary key, stud_name varchar(50));
+
+insert into stud6(stud_id,stud_name)value(101,'Neha'),(102,'Rakshata');
+select * from stud6;
+
+-- 8. Foreign Key Constraint
+
+create table stud7(stud_id int primary key, stud_name varchar(50));
+
+insert into stud7(stud_id,stud_name)value(101,'Neha'),(102,'Rakshata');
+select * from stud7;
+
+
+create table stud8(id int , acc_id int, stud_name varchar(50),marks int, foreign key (id) references stud7(stud_id));
+
+insert into stud8(id,acc_id,stud_name,marks)value(101,202,'Neha',80),(102,203,'Rakshata',70);
+
+select * from stud8;
+
+-- 9. create table for student uses primary key and sports uses foreign key 
+
+create table student1
+(
+stud_id int primary key,
+stud_name varchar(50),
+stud_dept varchar(50),
+stud_age tinyint ,
+stud_city varchar(50));
+
+insert into student1 values(101,'Neha','CSE',20,'Solapur'),(102,'Asmita','AIDS',24,'Solapur'),(103,'Rakshata','ENTC',19,'Solapur');
+
+select *  from student1;
+
+create table sport2
+(
+id int primary key,
+sport_id int ,
+stud_name varchar(50),
+stud_dept varchar(50),
+stud_age tinyint ,
+stud_city varchar(50),
+foreign key (id) references student1(stud_id));
+
+insert into sport2 values
+(101,450,'Neha','CSE',20,'Solapur'),
+(102,550,'Asmita','AIDS',24,'Solapur'),
+(103,600,'Rakshata','ENTC',19,'Solapur');
+
+select * from sport2;
