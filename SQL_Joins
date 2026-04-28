@@ -1,0 +1,136 @@
+create database Student1;
+use student1;
+
+
+create table Stud_info
+(stud_id int primary key,
+ stud_name varchar(50));
+ 
+ insert into stud_info 
+ value 
+ (101,'Neha'),
+ (102,'Asmita'),
+ (103,'Rakshata'),
+ (104,'Gaurav'),
+ (105,'Rahul'),
+ (106,'Radhika'),
+ (107,'Alisha'),
+ (108,'Rohan'),
+ (109,'kartik'),
+ (110,'Raghav');
+ 
+ select * from stud_info;
+ 
+ 
+ create table stud_refer
+ (
+ st_id int ,
+ st_name varchar(50),
+ st_city varchar(50),
+ st_age tinyint);
+ 
+ insert into stud_refer 
+ value 
+ (101,'Neha','Solapur',21),
+ (102,'Asmita','Pune',20),
+ (201,'Reet','Mumbai',19),
+ (104,'Gaurav','Solapur',20),
+ (105,'Rahul','Pune',24),
+ (202,'Yash','Mumbai',25),
+ (203,'Aarti','Pune',20),
+ (204,'Shivangi','Nagpur',26),
+ (205,'Ranbir','Nagpur',28),
+ (110,'Raghav','Solapur',27);
+
+select * from stud_refer;
+
+
+-- Limit 
+
+-- 1. 
+select * from stud_info limit 5;
+
+-- 2. where clause using
+select * from stud_info where stud_id = 105 limit 5;
+
+-- 3. Order by using
+select * from stud_info order by stud_name = 'Rakshata' limit 6;
+
+-- 4 Where clause and order by using
+select * from stud_info where stud_id = 106 order by stud_name = 'Radhika' limit 7;
+
+
+-- Joins Operations
+
+-- 1. Inner Join
+select * from stud_info inner join stud_refer on stud_id = st_id;  -- Only common records fetched..
+
+-- 2. Left Join
+select * from stud_info left join stud_refer on stud_id =st_id;    -- Only left side table records fetched..
+
+-- 3. Right join
+select * from stud_info right join stud_refer on stud_id = st_id;   -- only right side table records fetched..
+
+-- 4. Cross Join
+select * from stud_info cross join stud_refer ;  
+
+-- 5. Full join
+select * from stud_info full join stud_refer ;  
+
+
+-- Set operators
+
+create table Stud_info1
+(stud_id int primary key,
+ stud_name varchar(50));
+ 
+ insert into stud_info1 
+ value 
+ (101,'Neha'),
+ (102,'Asmita'),
+ (103,'Rakshata'),
+ (104,'Gaurav'),
+ (105,'Rahul'),
+ (106,'Radhika'),
+ (107,'Alisha'),
+ (108,'Rohan'),
+ (109,'kartik'),
+ (110,'Raghav');
+ 
+ select * from stud_info1;
+ 
+ 
+ create table Stud_info2
+(stud_id int primary key,
+ stud_name varchar(50));
+ 
+ insert into stud_info2 
+ value 
+ (201,'PQR'),
+ (202,'ABC'),
+ (203,'LMN'),
+ (104,'Gaurav'),
+ (105,'Rahul'),
+ (106,'Radhika'),
+ (207,'XYZ'),
+ (108,'Rohan'),
+ (209,'UVW'),
+ (110,'Raghav');
+ 
+ select * from stud_info2;
+ 
+-- 1. Union 
+select * from stud_info1 union select * from stud_info2;
+
+-- 2. Union All
+select * from stud_info1 union all select * from stud_info2;
+
+-- 3. Intersect
+select * from stud_info1 
+intersect
+select * from stud_info2;
+
+-- 4. Except
+select * from stud_info1 
+except 
+select * from stud_info2;
