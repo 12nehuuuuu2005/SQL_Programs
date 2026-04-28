@@ -1,0 +1,60 @@
+create database Employee;
+use Employee;
+
+
+-- empty column query
+
+create table emp_info
+( emp_id int, emp_name varchar(255), emp_decustpt varchar(50)); 
+
+insert into emp_info(emp_id,emp_name,emp_dept) 
+value 
+(102, 'PQR', 'Accounting'),
+(103,'LMN','marketing'),
+(104,'UVW','sales'),
+(105,' ','Production');
+
+select * from emp_info;
+
+-- one column remove
+
+create table emp_info2
+( emp_id int, emp_name varchar(255), emp_contact bigint); 
+
+
+insert into emp_info2(emp_id,emp_name) 
+value 
+(102, 'PQR'),
+(103,'LMN'),
+(104,'UVW'),
+(105, 'STR');
+
+select * from emp_info2;
+
+-- datetime query 
+
+create table emp_info3
+( emp_id int, emp_name varchar(255), emp_contact bigint , reporting_time datetime, emp_age tinyint); 
+
+
+insert into emp_info3(emp_id,emp_name,emp_contact,reporting_time,emp_age) 
+value 
+(102, 'PQR',123456790,'2026-01-1 10:12:02',22),
+(103,'LMN',1234509876,'2026-02-2 4:5:5',24),
+(104,'UVW',1232654587,'2026-03-3 7:56:00',32),
+(105,'STR',0123456789,'2026-03-2 3:3:3',30);
+
+select * from emp_info3;
+
+-- uses datatypes of numeric 
+
+create table emp_info4
+( emp_id int, emp_name varchar(255), emp_salary float, emp_score decimal); 
+
+
+insert into emp_info4(emp_id,emp_name,emp_salary,emp_score) 
+value 
+(101, 'PQR', 45.0,230),(102, 'ABC',2.5,550);
+
+
+select * from emp_info4;
